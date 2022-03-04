@@ -5,7 +5,7 @@ def abrir(img):
 
     #EL NOMBRE DE LA IMAGEN SERA INTRODUCIDA EN LA VARIABLE img
     #POR ESO SE CONCATENA
-    rutaArchivo=("./img/"+img) 
+    rutaArchivo=("./img/"+img) #./ ES PARA LA RUTA ACTUAL EN LA QUE ESTAMOS
 
     img= Image.open(rutaArchivo) #ABRE LA IMAGEN DESDE LA RUTA OBTENIDA
 
