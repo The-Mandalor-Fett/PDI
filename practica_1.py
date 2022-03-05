@@ -1,5 +1,3 @@
-from re import I
-from sre_parse import WHITESPACE
 from PIL import Image
 
 def abrir(img):#SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
@@ -32,9 +30,9 @@ def escala_grises(img): #SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
             #PARA OBTENER LA IMAGEN EN GRISES DEBAMOS SACAR SU PORMEDIO COMO ENTERO
             gris = int((r + g + b)/3)
             #PARA PONER EL PIXEL EN GRISES NECESITAMOS UNA TUPLA QUE CONTENGA LOS 3 NIVELES DE GRIS
-            pixel = tuple([gris,gris,gris])#GUARDAMOS LOS VALORES DE GRIS EN UNA TUPLA
-            print(pixel)
-            imgris.putpixel((i,j),pixel)#COLOCAMOS LOS VALORES DE GRIS EN LOS PIXELES
+            tupla = (gris,gris,gris)#GUARDAMOS LOS VALORES DE GRIS EN UNA TUPLA
+            #print(tupla)
+            imgris.putpixel((i,j),tupla)#COLOCAMOS LOS VALORES DE GRIS EN LOS PIXELES
             print("Niveles de gris en la posicion ["+str(i)+" "+str(j)+"] = "+str(gris))
             j += 1
         i += 1   #AUMENTAMOS EN CADA ITERACIÓN PARA CAMBIAR CADA UNO DE LOS PIXELES
