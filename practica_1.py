@@ -1,3 +1,5 @@
+from operator import ne
+from tkinter import image_names
 from PIL import Image
 
 def abrir(img):#SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
@@ -12,6 +14,7 @@ def abrir(img):#SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
     print(rutaArchivo)#MUESTRA LA RUTA DEL ARCHIVO
     
 #COMO NO QUIERO TRABAJAR CON OTRA IMAGEN EN GRISES CONVERTIRÉ LA IMAGEN ORIGINAL EN GRISES
+#NO FUNCIONO Y NO GUARDA LA IMAGEN CORRECTAMENTE xd
 def escala_grises(img): #SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
 
     rutaArchivo=("./img/"+img) 
@@ -37,8 +40,28 @@ def escala_grises(img): #SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
             j += 1
         i += 1   #AUMENTAMOS EN CADA ITERACIÓN PARA CAMBIAR CADA UNO DE LOS PIXELES
     imgris.show()
+    imgris.save("./img/jinxgrises.jpg")
 #MÉTODO QUE DA EL NEGATIVO EN ESCALA DE GRISES
 def negativo_grises(img):
-    
+    rutaArchivo=("./img/"+img) 
+    img= Image.open(rutaArchivo) 
+    img.show()
+    imgnegativo = img
+    ''' PARA OBTENER EL NEGATIVO DEBEMOS RESTAR EL VAMOR MÁXIMO DE GRIS 255 POR
+    EL VALOR ACTUAL DEL PIXEL 255-valoractual'''
+    i = 0
+    while i < imgnegativo.size[0]: #.size ES PARA EL TAMAÑO DEL arreglo Y [0] ES PARA LAS FILAS
+        j = 0
+        while j < imgnegativo.size[1]:
+            gris1,gris2,gris3 = imgnegativo.getpixel((i,j))
+            valorActual = int((gris1 + gris2 + gris3) / 3)
+            negativo = 255 - valorActual
+            tupla = (negativo,negativo,negativo)
+            print("Valores actuales de gris en la imagen = ["+str(gris1)+", "+str(gris2)+", "+str(gris3)+"]")
+            print("Nuevo valor obtenido "+str(negativo))
+            imgnegativo.putpixel((i,j),tupla)
+            j += 1
+        i += 1
+    imgnegativo.show()
 
     
