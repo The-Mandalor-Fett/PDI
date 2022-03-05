@@ -54,8 +54,8 @@ def negativo_grises(img):
         j = 0
         while j < imgnegativo.size[1]:
             gris1,gris2,gris3 = imgnegativo.getpixel((i,j))
-            valorActual = int((gris1 + gris2 + gris3) / 3)
-            negativo = 255 - valorActual
+            valorActual = int((gris1 + gris2 + gris3) / 3) #OBTIENE EL AVLOR ACTUAL DE GRIS
+            negativo = 255 - valorActual #OBTIENE SU NEGATIVO
             tupla = (negativo,negativo,negativo)
             print("Valores actuales de gris en la imagen = ["+str(gris1)+", "+str(gris2)+", "+str(gris3)+"]")
             print("Nuevo valor obtenido "+str(negativo))
