@@ -37,6 +37,8 @@ def escala_grises(img): #SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
             j += 1
         i += 1   #AUMENTAMOS EN CADA ITERACIÓN PARA CAMBIAR CADA UNO DE LOS PIXELES
     imgris.show()
-
+#MÉTODO QUE DA EL NEGATIVO EN ESCALA DE GRISES
+def negativo_grises(img):
+    
 
     
