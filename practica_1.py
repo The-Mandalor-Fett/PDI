@@ -62,5 +62,5 @@ def negativo_grises(img):
             imgnegativo.putpixel((i,j),tupla)
             j += 1
         i += 1
-    
+    imgnegativo.save("./img/negativo.jpg")
     imgnegativo.show()
