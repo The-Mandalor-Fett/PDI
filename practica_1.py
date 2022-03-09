@@ -12,13 +12,13 @@ def abrir(img):#SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
 
     img.show() #MUESTRA LA IMAGEN EN TU EXPLORADOR DEFALUT
     print(rutaArchivo)#MUESTRA LA RUTA DEL ARCHIVO
-    
+
 #COMO NO QUIERO TRABAJAR CON OTRA IMAGEN EN GRISES CONVERTIRÉ LA IMAGEN ORIGINAL EN GRISES
 #NO FUNCIONO Y NO GUARDA LA IMAGEN CORRECTAMENTE xd
 def escala_grises(img): #SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
 
-    rutaArchivo=("./img/"+img) 
-    img= Image.open(rutaArchivo) 
+    rutaArchivo=("./img/"+img)
+    img= Image.open(rutaArchivo)
     img.show() #MUESTRA LA IMAGEN EN TU EXPLORADOR DEFALUT
     #AHORA NECESITAMOS CREAR UNA NUEVA VARIABLE QUE CONTENGA LA NUEVA IMAGEN EN
     #ESCALA DE GRISES, LO HAREMOS CAMBIANDO CADA PIXEL DE LA IMAGEN CON SU CORRESPONDIENTE EN RGB
@@ -29,7 +29,7 @@ def escala_grises(img): #SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
         j = 0
         while j < imgris.size[1]:
             r, g , b = imgris.getpixel((i,j)) #OBTIENE EL PIXEL DE LA POSICIÓN [i,j]
-            
+
             #PARA OBTENER LA IMAGEN EN GRISES DEBAMOS SACAR SU PORMEDIO COMO ENTERO
             gris = int((r + g + b)/3)
             #PARA PONER EL PIXEL EN GRISES NECESITAMOS UNA TUPLA QUE CONTENGA LOS 3 NIVELES DE GRIS
@@ -43,8 +43,8 @@ def escala_grises(img): #SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
     imgris.save("./img/jinxgrises.jpg")
 #MÉTODO QUE DA EL NEGATIVO EN ESCALA DE GRISES
 def negativo_grises(img):
-    rutaArchivo=("./img/"+img) 
-    img= Image.open(rutaArchivo) 
+    rutaArchivo=("./img/"+img)
+    img= Image.open(rutaArchivo)
     img.show()
     imgnegativo = img
     ''' PARA OBTENER EL NEGATIVO DEBEMOS RESTAR EL VAMOR MÁXIMO DE GRIS 255 POR
@@ -54,14 +54,13 @@ def negativo_grises(img):
         j = 0
         while j < imgnegativo.size[1]:
             gris1,gris2,gris3 = imgnegativo.getpixel((i,j))
-            valorActual = int((gris1 + gris2 + gris3) / 3)
-            negativo = 255 - valorActual
+            valorActual = int((gris1 + gris2 + gris3) / 3) #OBTIENE EL VALOR ACTUAL DE GRIS
+            negativo = 255 - valorActual #OBTIENE SU NEGATIVO
             tupla = (negativo,negativo,negativo)
             print("Valores actuales de gris en la imagen = ["+str(gris1)+", "+str(gris2)+", "+str(gris3)+"]")
             print("Nuevo valor obtenido "+str(negativo))
             imgnegativo.putpixel((i,j),tupla)
             j += 1
         i += 1
-    imgnegativo.show()
-
     
+    imgnegativo.show()
