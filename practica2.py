@@ -2,6 +2,7 @@ from PIL import Image
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
+from scipy import stats as st
 
 def abrir(img):#SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
 
@@ -93,9 +94,21 @@ def histograma_grises(img):
             intensidadesDegris[img.item(i,j)] = intensidadesDegris[img.item(i,j)] +1 
             #print("Valor de i,j= "+str(img.item(i,j))+" en la posición "+str(i)+" "+str(j))
             #img.item(i,j)-> NOS REGRESA UN VALOR EN UNA POCICIÓN DETERMINADA
-    intensidadesDegris = np.asarray(intensidadesDegris)
+
+    intensidadesDegris = np.asarray(intensidadesDegris)#OBTENEMOS LOS VALORES COMO array PARA EL HISTOGRAMA 
+    #Y ENCONTRAR, media, moda, etc.
     print("Posiciones en Y (intensidad) : ",end="")
     print(" "+str(intensidadesDegris))
+    media = int(np.mean(intensidadesDegris)) #CALCULA LA DEL HISTOGRAMA
+    moda = int(st.mode(intensidadesDegris)) #CALCULA LA DEL HISTOGRAMA 
+    mediana = int(np.median(intensidadesDegris)) #CALCULA LA DEL HISTOGRAMA 
+    desvEst = int(np.std(intensidadesDegris)) #CALCULA LA DEL HISTOGRAMA 
+    varianza = int(np.var(intensidadesDegris)) #CALCULA LA DEL HISTOGRAMA 
+    print("La media es: "+str(media))
+    print("La moda es: "+str(moda))
+    print("La mediana es: "+str(mediana))
+    print("La varianza es: "+str(varianza))
+    print("La desviación estandar es: "+str(desvEst))
     plt.plot(intensidadesDegris)
     plt.show()#MUESTRA LA PRIMERA FORMA DEL HISTOGRAMA
     
