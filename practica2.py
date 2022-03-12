@@ -42,7 +42,7 @@ def escala_grises(img): #SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
         i += 1   #AUMENTAMOS EN CADA ITERACIÓN PARA CAMBIAR CADA UNO DE LOS PIXELES
     imgris.save("./img/escalagris.jpg")
     imgris.show()
-
+   
 #MÉTODO QUE DA EL NEGATIVO EN ESCALA DE GRISES
 def negativo_grises(img):
     rutaArchivo=("./img/"+img)
@@ -77,22 +77,27 @@ def histograma_grises(img):
     #datos = np.array(d)
     #media2= int(datos.mean())#MEDIA DE CADA DATO DE LO PIXELES
     cv2.imshow("Imagen para histograma",img)
-    height = img.shape[0]
-    width = img.shape[1]
-    intensidades=[]
+    ancho = img.shape[0] #OBTIENE EL ancho DE LA IMAGEN 
+    largo = img.shape[1] #OBTIENE EL largo DE LA IMAGEN
+    intensidadesDegris=[] 
     for i in range(256):
-        intensidades.append(0)
-    for i in range(height):
-        for j in range(width):
-            intensidades[img.item(i,j)] = intensidades[img.item(i,j)] +1
+        intensidadesDegris.append(0) #RELLENA LOS 256 TIPOS DE INTENSIDAD DE GRIS CON 0
 
-
-    intensidades = np.array(intensidades)
-    print("intensidad :" +str(intensidades))
-    media = intensidades.mean()
-    print("La media es : " +str(media))#MUESTRA LA MEDIA DEL HISTOGRAMA
-    plt.plot(intensidades)
+    for i in range(ancho):
+        for j in range(largo):
+            #LA intensidadDegris NOS VA A AYUDAR PARA OBTENER LOS VALORES DE GRIS EN CIERTA POSICIÓN
+            #EL VALOR OBTENIDO LO COLOCA  EN LA POSICIÓN img.item(i,j) Y LE SUMA 1
+            #POR EJEMPLO TENAMOS EL VALOR DE img.item(i,j) = 127 ENTONCES TENEMOS
+            #intensidadesDegris[127] = 0, DESPUÉS LE SUMAMOS 1 
+            #O SEA QUE EN LA POSICIÓN 127 TENEMOS 1
+            intensidadesDegris[img.item(i,j)] = intensidadesDegris[img.item(i,j)] +1 
+            #print("Valor de i,j= "+str(img.item(i,j))+" en la posición "+str(i)+" "+str(j))
+            #img.item(i,j)-> NOS REGRESA UN VALOR EN UNA POCICIÓN DETERMINADA
+    intensidadesDegris = np.asarray(intensidadesDegris)
+    print("Posiciones en Y (intensidad) : ",end="")
+    print(" "+str(intensidadesDegris))
+    plt.plot(intensidadesDegris)
     plt.show()#MUESTRA LA PRIMERA FORMA DEL HISTOGRAMA
-
-    cv2.waitKey(1000)
-    cv2.destroyAllWindows()
+    
+    
+    
