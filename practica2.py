@@ -42,7 +42,7 @@ def escala_grises(img): #SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
         i += 1   #AUMENTAMOS EN CADA ITERACIÓN PARA CAMBIAR CADA UNO DE LOS PIXELES
     imgris.save("./img/escalagris.jpg")
     imgris.show()
-   
+
 #MÉTODO QUE DA EL NEGATIVO EN ESCALA DE GRISES
 def negativo_grises(img):
     rutaArchivo=("./img/"+img)
@@ -68,6 +68,31 @@ def negativo_grises(img):
     imgnegativo.show()
 
 def histograma_grises(img):
-    
-    
-    
+    rutaArchivo=("./img/"+img)
+    img = cv2.imread(rutaArchivo,0)#ABRE LA IMAGEN, EL CERO ES PARA IMAGENES A ESCALA DE GRISES, 1  PARA A COLOR
+    #SI NO ESTÁ A COLOR NO VA A ABRIR LA PRIMERA FORMA DEL HISTOGRAMA
+    img1 = Image.open(rutaArchivo)
+    #d = list(img1.getdata())
+    #print(d)
+    #datos = np.array(d)
+    #media2= int(datos.mean())#MEDIA DE CADA DATO DE LO PIXELES
+    cv2.imshow("Imagen para histograma",img)
+    height = img.shape[0]
+    width = img.shape[1]
+    intensidades=[]
+    for i in range(256):
+        intensidades.append(0)
+    for i in range(height):
+        for j in range(width):
+            intensidades[img.item(i,j)] = intensidades[img.item(i,j)] +1
+
+
+    intensidades = np.array(intensidades)
+    print("intensidad :" +str(intensidades))
+    media = intensidades.mean()
+    print("La media es : " +str(media))#MUESTRA LA MEDIA DEL HISTOGRAMA
+    plt.plot(intensidades)
+    plt.show()#MUESTRA LA PRIMERA FORMA DEL HISTOGRAMA
+
+    cv2.waitKey(1000)
+    cv2.destroyAllWindows()
