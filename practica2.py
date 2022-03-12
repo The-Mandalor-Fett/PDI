@@ -49,8 +49,8 @@ def negativo_grises(img):
     img= Image.open(rutaArchivo)
     img.show()
     imgnegativo = img
-    ''' PARA OBTENER EL NEGATIVO DEBEMOS RESTAR EL VAMOR MÁXIMO DE GRIS 255 POR
-    EL VALOR ACTUAL DEL PIXEL 255-valoractual'''
+    # PARA OBTENER EL NEGATIVO DEBEMOS RESTAR EL VAMOR MÁXIMO DE GRIS 255 POR
+    #EL VALOR ACTUAL DEL PIXEL 255-valoractual
     i = 0
     while i < imgnegativo.size[0]: #.size ES PARA EL TAMAÑO DEL arreglo Y [0] ES PARA LAS FILAS
         j = 0
@@ -66,3 +66,8 @@ def negativo_grises(img):
         i += 1
     imgnegativo.save("./img/negativo.jpg")#GUARDA LA IMAGEN EN NEGATIVO EN LA CARPETA DE img
     imgnegativo.show()
+
+def histograma_grises(img):
+    
+    
+    
