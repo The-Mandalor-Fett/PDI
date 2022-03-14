@@ -1,3 +1,4 @@
+from functools import total_ordering
 from PIL import Image
 import cv2
 import numpy as np
@@ -74,17 +75,21 @@ def histograma_grises(img):
     img = cv2.imread(rutaArchivo,0)#ABRE LA IMAGEN, EL CERO ES PARA IMAGENES A ESCALA DE GRISES, 1  PARA A COLOR
     #SI NO ESTÁ A COLOR NO VA A ABRIR LA PRIMERA FORMA DEL HISTOGRAMA
     img1 = Image.open(rutaArchivo)
-    #d = list(img1.getdata())
-    #print(d)
-    #datos = np.array(d)
-    #media2= int(datos.mean())#MEDIA DE CADA DATO DE LO PIXELES
-    cv2.imshow("Imagen para histograma",img)
     ancho = img.shape[0] #OBTIENE EL ancho DE LA IMAGEN 
     largo = img.shape[1] #OBTIENE EL largo DE LA IMAGEN
+    #print(img1.size)
+    ancho1 = img1.size[0] #OBTIENE EL ancho CON PIL
+    largo1 = img1.size[1] #OBTIENE EL largo CON PIL
+    #print("Ancho y largo")
+    #print(ancho1,largo1)
+    datoDepixel = []
     intensidadesDegris=[] 
+    total = ancho*largo
     for i in range(256):
         intensidadesDegris.append(0) #RELLENA LOS 256 TIPOS DE INTENSIDAD DE GRIS CON 0
-
+    
+    datoDepixel = list((img1.getdata()))#OBTIENE LOS NIVELES DE GRIS DE LOS PIXELES
+    #print(datoDepixel)
     for i in range(ancho):
         for j in range(largo):
             #LA intensidadDegris NOS VA A AYUDAR PARA OBTENER LOS VALORES DE GRIS EN CIERTA POSICIÓN
@@ -92,31 +97,35 @@ def histograma_grises(img):
             #POR EJEMPLO TENAMOS EL VALOR DE img.item(i,j) = 127 ENTONCES TENEMOS
             #intensidadesDegris[127] = 0, DESPUÉS LE SUMAMOS 1 
             #O SEA QUE EN LA POSICIÓN 127 TENEMOS 1
+            valor = img.item(i,j)
             intensidadesDegris[img.item(i,j)] = intensidadesDegris[img.item(i,j)] +1 
             #print("Valor de i,j= "+str(img.item(i,j))+" en la posición "+str(i)+" "+str(j))
             #img.item(i,j)-> NOS REGRESA UN VALOR EN UNA POCICIÓN DETERMINADA
 
+    #datosDepixel = list(img1.getdata())#OBTIENE LOS VALORES DE CADA pixel EN GRIS DE LA IMAGEN
+    
     intensidadesDegris = np.array(intensidadesDegris)#OBTENEMOS LOS VALORES COMO array PARA EL HISTOGRAMA 
     #Y ENCONTRAR, media, moda, etc. DEL HISTOGRAMA
-    print("Posiciones en Y (intensidad) : ")
-    print(" "+str(intensidadesDegris))
+    #print("Posiciones en Y (intensidad) : ")
+    #print(" "+str(intensidadesDegris))
     media = int(np.mean(intensidadesDegris)) #CALCULA LA media DEL HISTOGRAMA
-    moda = stats.mode(intensidadesDegris) #CALCULA LA DEL moda HISTOGRAMA CON statistics, SI ENCUENTRA DOS MODAS 
+    moda = (stats.mode(datoDepixel)) #CALCULA LA DEL moda HISTOGRAMA CON statistics, SI ENCUENTRA DOS MODAS 
     #RETORNA LA PRIMERA ENCONTRADA
-    moda2 = (st.mode(intensidadesDegris)) #CALCULA LA DEL moda HISTOGRAMA CON scipy, SI HAY DOS MODAS
+    moda2 = ((st.mode(datoDepixel))) #CALCULA LA DEL moda HISTOGRAMA CON scipy, SI HAY DOS MODAS
     #RETORNA LA MÁS PEQUEÑA
     mediana = int(np.median(intensidadesDegris)) #CALCULA LA mediana DEL HISTOGRAMA 
     desvEst = int(np.std(intensidadesDegris)) #CALCULA LA  desviación estandar DEL HISTOGRAMA 
     varianza = int(np.var(intensidadesDegris)) #CALCULA LA varianza DEL HISTOGRAMA 
-    moda3 = Counter(intensidadesDegris)
-   
+    moda3 = Counter(datoDepixel)
+
     print("La media es: "+str(media))
     print("La moda con statistics es: "+str(moda))
     print("La moda con scipy es: "+str(moda2))
-    #print("La moda con collections y flatten es: "+str(moda3))
+    print("La moda con collections y flatten es: "+str(moda3))
     print("La mediana es: "+str(mediana))
     print("La varianza es: "+str(varianza))
     print("La desviación estandar es: "+str(desvEst))
+    cv2.imshow("Imagen para histograma",img)
     plt.plot(intensidadesDegris)
     plt.show()#MUESTRA LA PRIMERA FORMA DEL HISTOGRAMA
 
@@ -132,6 +141,11 @@ def histograma_grises(img):
     
     ax[1,0].axis("off")
     ax[1,1].axis("off")
-    media = intensidadesDegris.mean()
+    #CALCULA LO ANTERIOR PERO CON LA SEGUNDA FORMA DEL HISTOGRAMA
+    print("La media es: "+str(int(np.mean(imghisto))))
+    print("La moda con scipy es: "+str(moda2))
+    print("La mediana es: "+str(int(np.median(imghisto))))
+    print("La varianza es: "+str(int(np.var(imghisto))))
+    print("La desviación estandar es: "+str(int(np.std(imghisto))))
     plt.show()#MUESTRA LA SEGUNDA FORMA DE LA CREAR EL HISTOGRAMA
     
