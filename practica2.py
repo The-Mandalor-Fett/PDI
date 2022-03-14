@@ -1,9 +1,10 @@
 from PIL import Image
 import cv2
 import numpy as np
-from matplotlib import pyplot as plt
+from matplotlib import collections, pyplot as plt
 from scipy import stats as st
-
+import statistics as stats
+from collections import Counter
 def abrir(img):#SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
 
     #EL NOMBRE DE LA IMAGEN SERA INTRODUCIDA EN LA VARIABLE img
@@ -95,22 +96,42 @@ def histograma_grises(img):
             #print("Valor de i,j= "+str(img.item(i,j))+" en la posición "+str(i)+" "+str(j))
             #img.item(i,j)-> NOS REGRESA UN VALOR EN UNA POCICIÓN DETERMINADA
 
-    intensidadesDegris = np.asarray(intensidadesDegris)#OBTENEMOS LOS VALORES COMO array PARA EL HISTOGRAMA 
-    #Y ENCONTRAR, media, moda, etc.
-    print("Posiciones en Y (intensidad) : ",end="")
+    intensidadesDegris = np.array(intensidadesDegris)#OBTENEMOS LOS VALORES COMO array PARA EL HISTOGRAMA 
+    #Y ENCONTRAR, media, moda, etc. DEL HISTOGRAMA
+    print("Posiciones en Y (intensidad) : ")
     print(" "+str(intensidadesDegris))
-    media = int(np.mean(intensidadesDegris)) #CALCULA LA DEL HISTOGRAMA
-    moda = int(st.mode(intensidadesDegris)) #CALCULA LA DEL HISTOGRAMA 
-    mediana = int(np.median(intensidadesDegris)) #CALCULA LA DEL HISTOGRAMA 
-    desvEst = int(np.std(intensidadesDegris)) #CALCULA LA DEL HISTOGRAMA 
-    varianza = int(np.var(intensidadesDegris)) #CALCULA LA DEL HISTOGRAMA 
+    media = int(np.mean(intensidadesDegris)) #CALCULA LA media DEL HISTOGRAMA
+    moda = stats.mode(intensidadesDegris) #CALCULA LA DEL moda HISTOGRAMA CON statistics, SI ENCUENTRA DOS MODAS 
+    #RETORNA LA PRIMERA ENCONTRADA
+    moda2 = (st.mode(intensidadesDegris)) #CALCULA LA DEL moda HISTOGRAMA CON scipy, SI HAY DOS MODAS
+    #RETORNA LA MÁS PEQUEÑA
+    mediana = int(np.median(intensidadesDegris)) #CALCULA LA mediana DEL HISTOGRAMA 
+    desvEst = int(np.std(intensidadesDegris)) #CALCULA LA  desviación estandar DEL HISTOGRAMA 
+    varianza = int(np.var(intensidadesDegris)) #CALCULA LA varianza DEL HISTOGRAMA 
+    moda3 = Counter(intensidadesDegris)
+   
     print("La media es: "+str(media))
-    print("La moda es: "+str(moda))
+    print("La moda con statistics es: "+str(moda))
+    print("La moda con scipy es: "+str(moda2))
+    #print("La moda con collections y flatten es: "+str(moda3))
     print("La mediana es: "+str(mediana))
     print("La varianza es: "+str(varianza))
     print("La desviación estandar es: "+str(desvEst))
     plt.plot(intensidadesDegris)
     plt.show()#MUESTRA LA PRIMERA FORMA DEL HISTOGRAMA
+
+    imghisto = cv2.calcHist([img],[0],None,[256],[0,255])#SEGUNDA FORMA DE CALCULAR EL HISTOGRAMA
+    fig, ax=plt.subplots(2,2)#DIVIDE LAVENTANA EN QUE MUESTRA LA GRÁFICA EN 4 PARTES
+    ax[0,0].imshow(img,cmap="gray")#EN EL LUGAR 0,0 MUESTRA LA IMAGEN, EN GRIS Y CON UN TÍTULO
+    ax[0,0].set_title("Jinx")
+    ax[0,0].axis("off")#MUESTRA EL PLANO CARTESIANO DE LA IMAGEN
+
+    ax[0,1].plot(imghisto,color="blue")
+    ax[0,1].set_title("Jinx")
+
     
-    
+    ax[1,0].axis("off")
+    ax[1,1].axis("off")
+    media = intensidadesDegris.mean()
+    plt.show()#MUESTRA LA SEGUNDA FORMA DE LA CREAR EL HISTOGRAMA
     
