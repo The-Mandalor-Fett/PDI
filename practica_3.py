@@ -156,6 +156,15 @@ def umbral(img):
     imgUmbral = cv2.imread(rutaArchivo,0)#ABRE LA IMAGEN CON OPENCV, EL CERO ES PARA IMAGENES A ESCALA DE GRISES, 1  PARA A COLOR
     cv2.imshow("Imagen original (en grises)",imgUmbral)
     umbral=int(input("Por favor introduce el umbral: "))#PIDE AL USUARIO EL VALOR DEL umbral
-
+    mascara=np.uint8((umbral < imgUmbral)*255)#CALCULA EL umbral BINARIO CON LA FORMULA 
+    # PARA TODo umbral < valorDeGRisEn(x,y) ASIGNALE EL VALOR MÁXMO 255
+    # SÍ NO ES ASÍ ENCONTES ES 0
+    #umbral < imgUmbral NOS RETORNA VERDADERO O FALSO, O SEA UN UNO O CERO
+    #DEPENDIENDO DE EL VALOR DE umbral Y EL VALOR DEL pixel 
+    #ESO SE MULTIPLICA POR 255, DANDO 0 O 255 DEPENDIENDO DEL CASO
+    #ret,thresh1= cv2.threshold(imgUmbral,umbral,255,cv2.THRESH_BINARY)
+    cv2.imshow("Imagen binarizada",mascara)
+    #cv2.imshow("Imagen binarizada 2",thresh1)
+    cv2.imwrite("./img/binarizado.jpg",mascara)#GUARDA LA IMAGEN
     cv2.waitKey(0)
     cv2.destroyAllWindows()
