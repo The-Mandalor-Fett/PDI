@@ -44,7 +44,7 @@ def escala_grises(img): #SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
         i += 1   #AUMENTAMOS EN CADA ITERACIÓN PARA CAMBIAR CADA UNO DE LOS PIXELES
     imgris.save("./img/escalagris.jpg")
     imgris.show()
-   
+
 #MÉTODO QUE DA EL NEGATIVO EN ESCALA DE GRISES
 def negativo_grises(img):
     rutaArchivo=("./img/"+img)
@@ -74,7 +74,7 @@ def histograma_grises(img):
     img = cv2.imread(rutaArchivo,0)#ABRE LA IMAGEN, EL CERO ES PARA IMAGENES A ESCALA DE GRISES, 1  PARA A COLOR
     #SI NO ESTÁ A COLOR NO VA A ABRIR LA PRIMERA FORMA DEL HISTOGRAMA
     img1 = Image.open(rutaArchivo)
-    ancho = img.shape[0] #OBTIENE EL ancho DE LA IMAGEN 
+    ancho = img.shape[0] #OBTIENE EL ancho DE LA IMAGEN
     largo = img.shape[1] #OBTIENE EL largo DE LA IMAGEN
     #print(img1.size)
     ancho1 = img1.size[0] #OBTIENE EL ancho CON PIL
@@ -82,11 +82,11 @@ def histograma_grises(img):
     #print("Ancho y largo")
     #print(ancho1,largo1)
     datoDepixel = []
-    intensidadesDegris=[] 
+    intensidadesDegris=[]
     total = ancho*largo
     for i in range(256):
         intensidadesDegris.append(0) #RELLENA LOS 256 TIPOS DE INTENSIDAD DE GRIS CON 0
-    
+
     datoDepixel = list((img1.getdata()))#OBTIENE LOS NIVELES DE GRIS DE LOS PIXELES
     #print(datoDepixel)
     for i in range(ancho):
@@ -94,27 +94,27 @@ def histograma_grises(img):
             #LA intensidadDegris NOS VA A AYUDAR PARA OBTENER LOS VALORES DE GRIS EN CIERTA POSICIÓN
             #EL VALOR OBTENIDO LO COLOCA  EN LA POSICIÓN img.item(i,j) Y LE SUMA 1
             #POR EJEMPLO TENAMOS EL VALOR DE img.item(i,j) = 127 ENTONCES TENEMOS
-            #intensidadesDegris[127] = 0, DESPUÉS LE SUMAMOS 1 
+            #intensidadesDegris[127] = 0, DESPUÉS LE SUMAMOS 1
             #O SEA QUE EN LA POSICIÓN 127 TENEMOS 1
             valor = img.item(i,j)
-            intensidadesDegris[img.item(i,j)] = intensidadesDegris[img.item(i,j)] +1 
+            intensidadesDegris[img.item(i,j)] = intensidadesDegris[img.item(i,j)] +1
             #print("Valor de i,j= "+str(img.item(i,j))+" en la posición "+str(i)+" "+str(j))
             #img.item(i,j)-> NOS REGRESA UN VALOR EN UNA POCICIÓN DETERMINADA
 
     #datosDepixel = list(img1.getdata())#OBTIENE LOS VALORES DE CADA pixel EN GRIS DE LA IMAGEN
-    
-    intensidadesDegris = np.array(intensidadesDegris)#OBTENEMOS LOS VALORES COMO array PARA EL HISTOGRAMA 
+
+    intensidadesDegris = np.array(intensidadesDegris)#OBTENEMOS LOS VALORES COMO array PARA EL HISTOGRAMA
     #Y ENCONTRAR, media, moda, etc. DEL HISTOGRAMA
     #print("Posiciones en Y (intensidad) : ")
     #print(" "+str(intensidadesDegris))
     media = int(np.mean(intensidadesDegris)) #CALCULA LA media DEL HISTOGRAMA
-    moda = (stats.mode(datoDepixel)) #CALCULA LA DEL moda HISTOGRAMA CON statistics, SI ENCUENTRA DOS MODAS 
+    moda = (stats.mode(datoDepixel)) #CALCULA LA DEL moda HISTOGRAMA CON statistics, SI ENCUENTRA DOS MODAS
     #RETORNA LA PRIMERA ENCONTRADA
     moda2 = ((st.mode(datoDepixel))) #CALCULA LA DEL moda HISTOGRAMA CON scipy, SI HAY DOS MODAS
     #RETORNA LA MÁS PEQUEÑA
-    mediana = int(np.median(intensidadesDegris)) #CALCULA LA mediana DEL HISTOGRAMA 
-    desvEst = int(np.std(intensidadesDegris)) #CALCULA LA  desviación estandar DEL HISTOGRAMA 
-    varianza = int(np.var(intensidadesDegris)) #CALCULA LA varianza DEL HISTOGRAMA 
+    mediana = int(np.median(intensidadesDegris)) #CALCULA LA mediana DEL HISTOGRAMA
+    desvEst = int(np.std(intensidadesDegris)) #CALCULA LA  desviación estandar DEL HISTOGRAMA
+    varianza = int(np.var(intensidadesDegris)) #CALCULA LA varianza DEL HISTOGRAMA
     moda3 = Counter(datoDepixel)
 
     print("La media es: "+str(media))
@@ -137,7 +137,7 @@ def histograma_grises(img):
     ax[0,1].plot(imghisto,color="blue")
     ax[0,1].set_title("Jinx")
 
-    
+
     ax[1,0].axis("off")
     ax[1,1].axis("off")
     #CALCULA LO ANTERIOR PERO CON LA SEGUNDA FORMA DEL HISTOGRAMA
@@ -156,15 +156,17 @@ def umbral(img):
     imgUmbral = cv2.imread(rutaArchivo,0)#ABRE LA IMAGEN CON OPENCV, EL CERO ES PARA IMAGENES A ESCALA DE GRISES, 1  PARA A COLOR
     cv2.imshow("Imagen original (en grises)",imgUmbral)
     umbral=int(input("Por favor introduce el umbral: "))#PIDE AL USUARIO EL VALOR DEL umbral
-    mascara=np.uint8((umbral < imgUmbral)*255)#CALCULA EL umbral BINARIO CON LA FORMULA 
-    # PARA TODo umbral < valorDeGRisEn(x,y) ASIGNALE EL VALOR MÁXMO 255
+    mascara=np.uint8((umbral < imgUmbral)*255)#CALCULA EL umbral BINARIO CON LA FORMULA
+    # PARA TODO umbral < valorDeGRisEn(x,y) ASIGNALE EL VALOR MÁXMO 255
     # SÍ NO ES ASÍ ENCONTES ES 0
     #umbral < imgUmbral NOS RETORNA VERDADERO O FALSO, O SEA UN UNO O CERO
-    #DEPENDIENDO DE EL VALOR DE umbral Y EL VALOR DEL pixel 
+    #DEPENDIENDO DE EL VALOR DE umbral Y EL VALOR DEL pixel
     #ESO SE MULTIPLICA POR 255, DANDO 0 O 255 DEPENDIENDO DEL CASO
+    #uint8 SIGNIFICA UNSIGNED INTEGER O SEA ENTERO SIN SIGNO, SIEMPRE ES POSITIVO
+    #Y ES DE 8 BITS, POR LO QUE VA DE 0 A 255, ESO NOS DARÁ LA máscara
 
     #Segunda forma de obtener el umbralado binario
-    ret,thresh1= cv2.threshold(imgUmbral,umbral,255,cv2.THRESH_BINARY)#OBTIENE EL umbralado MEDIANTE LA FUNCIÓN threshold
+    ret,thresh1= cv2.threshold(imgUmbral,umbral,255,cv2.THRESH_BINARY)#OBTIENE EL umbralado MEDIANTE LA FUNCIÓN threshold DE OPENCV
     cv2.imshow("Imagen binarizada",mascara)
     cv2.imshow("Imagen binarizada 2",thresh1)
     cv2.imwrite("./img/binarizado.jpg",mascara)#GUARDA LA IMAGEN
