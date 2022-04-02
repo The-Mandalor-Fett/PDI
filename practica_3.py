@@ -162,9 +162,11 @@ def umbral(img):
     #umbral < imgUmbral NOS RETORNA VERDADERO O FALSO, O SEA UN UNO O CERO
     #DEPENDIENDO DE EL VALOR DE umbral Y EL VALOR DEL pixel 
     #ESO SE MULTIPLICA POR 255, DANDO 0 O 255 DEPENDIENDO DEL CASO
-    #ret,thresh1= cv2.threshold(imgUmbral,umbral,255,cv2.THRESH_BINARY)
+
+    #Segunda forma de obtener el umbralado binario
+    ret,thresh1= cv2.threshold(imgUmbral,umbral,255,cv2.THRESH_BINARY)#OBTIENE EL umbralado MEDIANTE LA FUNCIÓN threshold
     cv2.imshow("Imagen binarizada",mascara)
-    #cv2.imshow("Imagen binarizada 2",thresh1)
+    cv2.imshow("Imagen binarizada 2",thresh1)
     cv2.imwrite("./img/binarizado.jpg",mascara)#GUARDA LA IMAGEN
     cv2.waitKey(0)
     cv2.destroyAllWindows()
