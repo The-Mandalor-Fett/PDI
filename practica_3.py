@@ -163,7 +163,7 @@ def umbral(img):
     #DEPENDIENDO DE EL VALOR DE umbral Y EL VALOR DEL pixel
     #ESO SE MULTIPLICA POR 255, DANDO 0 O 255 DEPENDIENDO DEL CASO
     #uint8 SIGNIFICA UNSIGNED INTEGER O SEA ENTERO SIN SIGNO, SIEMPRE ES POSITIVO
-    #Y ES DE 8 BITS, POR LO QUE VA DE 0 A 255, ESO NOS DARÁ LA máscara
+    #Y ES DE 8 BITS, POR LO QUE VA DE 0 A 255, ESO NOS DARÁ LA máscara PARA OBTENER LA IMAGEN 
 
     #Segunda forma de obtener el umbralado binario
     ret,thresh1= cv2.threshold(imgUmbral,umbral,255,cv2.THRESH_BINARY)#OBTIENE EL umbralado MEDIANTE LA FUNCIÓN threshold DE OPENCV
