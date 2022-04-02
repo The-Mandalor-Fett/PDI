@@ -157,14 +157,14 @@ def umbral(img):
     cv2.imshow("Imagen original (en grises)",imgUmbral)
     umbral=int(input("Por favor introduce el umbral: "))#PIDE AL USUARIO EL VALOR DEL umbral
     mascara=np.uint8((umbral < imgUmbral)*255)#CALCULA EL umbral BINARIO CON LA FORMULA 
-    # PARA TODo umbral < valorDeGRisEn(x,y) ASIGNALE EL VALOR MÁXMO 255
+    # PARA TODO umbral < valorDeGRisEn(x,y) ASIGNALE EL VALOR MÁXMO 255
     # SÍ NO ES ASÍ ENCONTES ES 0
     #umbral < imgUmbral NOS RETORNA VERDADERO O FALSO, O SEA UN UNO O CERO
     #DEPENDIENDO DE EL VALOR DE umbral Y EL VALOR DEL pixel 
     #ESO SE MULTIPLICA POR 255, DANDO 0 O 255 DEPENDIENDO DEL CASO
 
     #Segunda forma de obtener el umbralado binario
-    ret,thresh1= cv2.threshold(imgUmbral,umbral,255,cv2.THRESH_BINARY)#OBTIENE EL umbralado MEDIANTE LA FUNCIÓN threshold
+    ret,thresh1= cv2.threshold(imgUmbral,umbral,255,cv2.THRESH_BINARY)#OBTIENE EL umbralado MEDIANTE LA FUNCIÓN threshold DE OPENCV
     cv2.imshow("Imagen binarizada",mascara)
     cv2.imshow("Imagen binarizada 2",thresh1)
     cv2.imwrite("./img/binarizado.jpg",mascara)#GUARDA LA IMAGEN
