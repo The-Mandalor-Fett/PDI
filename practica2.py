@@ -148,4 +148,5 @@ def histograma_grises(img):
     print("La varianza es: "+str(int(np.var(imghisto))))
     print("La desviación estandar es: "+str(int(np.std(imghisto))))
     plt.show()#MUESTRA LA SEGUNDA FORMA DE LA CREAR EL HISTOGRAMA
-    
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
