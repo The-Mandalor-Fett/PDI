@@ -1,4 +1,3 @@
-from functools import total_ordering
 from PIL import Image
 import cv2
 import numpy as np
@@ -148,5 +147,15 @@ def histograma_grises(img):
     print("La varianza es: "+str(int(np.var(imghisto))))
     print("La desviación estandar es: "+str(int(np.std(imghisto))))
     plt.show()#MUESTRA LA SEGUNDA FORMA DE LA CREAR EL HISTOGRAMA
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+#Método binarizació/umbralización
+def umbral(img):
+    rutaArchivo=("./img/"+img)
+    imgUmbral = cv2.imread(rutaArchivo,0)#ABRE LA IMAGEN CON OPENCV, EL CERO ES PARA IMAGENES A ESCALA DE GRISES, 1  PARA A COLOR
+    cv2.imshow("Imagen original (en grises)",imgUmbral)
+    umbral=int(input("Por favor introduce el umbral: "))#PIDE AL USUARIO EL VALOR DEL umbral
+
     cv2.waitKey(0)
     cv2.destroyAllWindows()
