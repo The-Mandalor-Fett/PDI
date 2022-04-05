@@ -189,9 +189,7 @@ def log(img):
     imgLog = np.uint8(logaritmo/maximoDelLogaritmo * 255)
 
     
-    #cv2.imshow("Imagen original",img)
-    #cv2.imshow("LOG",imgLog)
-    #print(constante)
+    
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
