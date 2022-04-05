@@ -192,17 +192,31 @@ def log(img):
     x = np.array(range(256))
     y = constante * np.log1p(np.double(x))
 
+    #GRAFICA LA TRANFORMACIÓN LOGARITMO
     plt.figure()
+    plt.subplot(131)
     plt.plot(x, y)
     plt.title('g(x,y) = c log(1 + f(x, y))')
     plt.xlabel('brillo - f(x,y)')
     plt.ylabel('brillo - g(x, y)')
+
+    #GRAFICA LA IMAGEN ORIGINAL
+    plt.subplot(132)
+    plt.imshow(img, cmap='gray')
+    plt.title('Imagen de entrada')
+    plt.axis('off')
+
+    #GRAFICA LA IMAGEN TRANSFORMADA
+    plt.subplot(133)
+    plt.imshow(imgLog, cmap='gray')
+    plt.title('Imagen de Imagen de salida')
+    plt.axis('off')
     plt.show()
     
-
+    
     #cv2.imshow("Imagen original",img)
     #cv2.imshow("LOG",imgLog)
     #print(constante)
-
+    
     cv2.waitKey(0)
     cv2.destroyAllWindows()
