@@ -173,3 +173,25 @@ def umbral(img):
     cv2.imwrite("./img/binarizado.jpg",mascara)#GUARDA LA IMAGEN
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+def log(img):
+    rutaArchivo=("./img/"+img)
+    img = cv2.imread(rutaArchivo,0)#ABRE LA IMAGEN CON OPENCV
+    #CALCULAMOS LA CONSTANTE c = 255/(log(1 + max(f(x,y)))) con NumPy
+    constante = int(input("Por favor introduce la constante: "))
+    #CALCULA EL logaritmo DE LA FORMA log(1+x)
+    logaritmo = constante * (np.log1p(img))
+
+    #NORMALIZAMOS POR SI TENEMOS VALORES MUY PEQUEÑOS
+    maximoDelLogaritmo = np.amax(logaritmo) #REGRESA EL VALOR MÁXIMO DEL ARREGLO
+
+    #CONVIERTE LOS VALORES A ENTEROS DE 8 BITS MÁXIMO
+    imgLog = np.uint8(logaritmo/maximoDelLogaritmo * 255)
+
+    
+    #cv2.imshow("Imagen original",img)
+    #cv2.imshow("LOG",imgLog)
+    #print(constante)
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
