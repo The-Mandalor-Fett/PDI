@@ -188,8 +188,21 @@ def log(img):
     #CONVIERTE LOS VALORES A ENTEROS DE 8 BITS MÁXIMO
     imgLog = np.uint8(logaritmo/maximoDelLogaritmo * 255)
 
+    #GRAFICAMOS LA TRANFORMACIÓN LOGARITMO PARA VER LOS VALORES QUE PUEDE TOMAR
+    x = np.array(range(256))
+    y = constante * np.log1p(np.double(x))
+
+    plt.figure()
+    plt.plot(x, y)
+    plt.title('g(x,y) = c log(1 + f(x, y))')
+    plt.xlabel('brillo - f(x,y)')
+    plt.ylabel('brillo - g(x, y)')
+    plt.show()
     
-    
+
+    #cv2.imshow("Imagen original",img)
+    #cv2.imshow("LOG",imgLog)
+    #print(constante)
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
