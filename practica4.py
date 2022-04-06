@@ -250,10 +250,19 @@ def potencia(img):
     plt.legend(loc='upper left')
     plt.xlabel('intensidades de entrada')
     plt.ylabel('intensidades de salida')
-    plt.show()
+    
 
     #CALCULAMOS LA TRANFORMACIÓN GAMMA
     transformacionGamma = constante1 * np.power(img,gamma1)
+    #NORMALIZAMOS
+    maximo = np.amax(transformacionGamma)
+    imgGamma = np.uint8(transformacionGamma/maximo * 255)
     
+    cv2.imshow("Transformación gamma",cv2.hconcat(img,imgGamma))
+    plt.show()
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
 
 
