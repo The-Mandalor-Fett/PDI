@@ -179,7 +179,7 @@ def log(img):
     rutaArchivo=("./img/"+img)
     img = cv2.imread(rutaArchivo,0)#ABRE LA IMAGEN CON OPENCV
     #CALCULAMOS LA CONSTANTE c = 255/(log(1 + max(f(x,y)))) con NumPy
-    constante = int(input("Por favor introduce la constante: "))
+    constante = 1
     #CALCULA EL logaritmo DE LA FORMA log(1+x)
     logaritmo = constante * (np.log1p(img))
 
@@ -224,4 +224,32 @@ def log(img):
 #Método tranformación potencia (correción gama)
 def potencia(img):
     rutaArchivo=("./img/"+img)
+    img = cv2.imread(rutaArchivo,0)
+
+    #CALCULAMOS LA constante CON DIFERENTES VALORES GAMMA
+    #constante = 255/(max(f(x,y)^gamma))
+    gamma = 0.5
+    x = np.array(range(256))
+    constante = 255/(np.power(255,gamma))
+    y = constante * np.power(x,gamma)
+
+    gamma1 = 1
+    constante1 = 255/(np.power(255,gamma1))
+    y1 = constante * np.power(x,gamma1)
+
+    gamma2 = 2.5
+    constante2 = 255/(np.power(255,gamma2))
+    y2 = constante * np.power(x,gamma2)
     
+    #GRAFICAMOS PARA VER EL COMPORTAMIENTO DE LAS FUNCIONES
+    plt.figure()
+    plt.title('correción gamma')
+    plt.plot(x, y, label = '$\gamma = 0.5$')
+    plt.plot(x, y1, label = '$\gamma = 1.0$')
+    plt.plot(x, y2, label = '$\gamma = 2.5$')
+    plt.legend(loc='upper left')
+    plt.xlabel('intensidades de entrada')
+    plt.ylabel('intensidades de salida')
+    plt.show()
+
+
