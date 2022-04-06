@@ -235,11 +235,11 @@ def potencia(img):
 
     gamma1 = 1
     constante1 = 255/(np.power(255,gamma1))
-    y1 = constante * np.power(x,gamma1)
+    y1 = constante1 * np.power(x,gamma1)
 
     gamma2 = 2.5
     constante2 = 255/(np.power(255,gamma2))
-    y2 = constante * np.power(x,gamma2)
+    y2 = constante2 * np.power(x,gamma2)
     
     #GRAFICAMOS PARA VER EL COMPORTAMIENTO DE LAS FUNCIONES
     plt.figure()
@@ -251,5 +251,9 @@ def potencia(img):
     plt.xlabel('intensidades de entrada')
     plt.ylabel('intensidades de salida')
     plt.show()
+
+    #CALCULAMOS LA TRANFORMACIÓN GAMMA
+    transformacionGamma = constante1 * np.power(img,gamma1)
+    
 
 
