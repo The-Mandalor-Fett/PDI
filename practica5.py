@@ -330,6 +330,8 @@ def resta():
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-
+#MÉTODO OPERACIONES LÓGICAS
+def logico():
+    
 
 
