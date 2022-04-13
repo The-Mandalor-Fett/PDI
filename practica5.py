@@ -280,8 +280,6 @@ def suma():
     rutaArchivo2=("./img/sacapuntas.jpg")
     img2 = cv2.imread(rutaArchivo2,0)
 
-
-
     #FUNCIÓN SUMA DE DOS IMÁGENES
     suma = cv2.add(img1,img2)
     
@@ -291,6 +289,7 @@ def suma():
     QUE ESTA VA A TENER alpha, LA imagen2, SU TRANPARENCIA, betha Y  UN VALOR gamma
     QUE SERÁ SUMADO AL RESULTADO FINAL DE LA IMAGEN, EN ESTE CASO 0 PARA NO ALTERAR
     EL RESULTADO FINAL'''
+
     #COLOCAMOS LAS 2 IMÁGENES JUNTAS
     plt.figure()
     plt.title("Imágenes originales")
@@ -308,6 +307,16 @@ def suma():
     plt.show()
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+#MÉTODO RESTA
+def resta():
+    #OBTENEMOS LA RUTA DE LAS IMÁGENES
+    rutaArchivo1=("./img/cadena.jpg")
+    img1 = cv2.imread(rutaArchivo1,0)
+    rutaArchivo2=("./img/sacapuntas.jpg")
+    img2 = cv2.imread(rutaArchivo2,0)
+
+    
 
 
 
