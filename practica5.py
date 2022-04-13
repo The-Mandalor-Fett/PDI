@@ -332,6 +332,12 @@ def resta():
 
 #MÉTODO OPERACIONES LÓGICAS
 def logico():
+    #OBTENEMOS LA RUTA DE LAS IMÁGENES
+    rutaArchivo1=("./img/cadena.jpg")
+    img1 = cv2.imread(rutaArchivo1,0)
+    rutaArchivo2=("./img/sacapuntas.jpg")
+    img2 = cv2.imread(rutaArchivo2,0)
+
     
 
 
