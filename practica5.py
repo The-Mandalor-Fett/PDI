@@ -291,6 +291,17 @@ def suma():
     QUE ESTA VA A TENER alpha, LA imagen2, SU TRANPARENCIA, betha Y  UN VALOR gamma
     QUE SERÁ SUMADO AL RESULTADO FINAL DE LA IMAGEN, EN ESTE CASO 0 PARA NO ALTERAR
     EL RESULTADO FINAL'''
+    #COLOCAMOS LAS 2 IMÁGENES JUNTAS
+    plt.figure()
+    plt.title("Imágenes originales")
+    plt.subplot(121)
+    plt.imshow(img1, cmap='gray')
+    plt.axis('off')
+
+    #GRAFICA LA IMAGEN TRANSFORMADA
+    plt.subplot(122)
+    plt.imshow(img2, cmap='gray')
+    plt.axis('off')
     
     cv2.imshow("Suma de imágenes",suma)
     cv2.imshow("Resultado 2",suma2)
