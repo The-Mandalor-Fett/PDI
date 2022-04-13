@@ -280,6 +280,7 @@ def suma():
     rutaArchivo2=("./img/sacapuntas.jpg")
     img2 = cv2.imread(rutaArchivo2,0)
 
+    #PARA REALIZAR LA suma AMBAS IMÁGENES DEBEN DE SER DEL MISMO TAMAÑO
     #FUNCIÓN SUMA DE DOS IMÁGENES
     suma = cv2.add(img1,img2)
     
@@ -316,7 +317,18 @@ def resta():
     rutaArchivo2=("./img/sacapuntas.jpg")
     img2 = cv2.imread(rutaArchivo2,0)
 
-    
+    #FUNCIÓN RESTA
+    resta = cv2.subtract(img1,img2)
+
+    #FUNCIÓN RESTA absdiff
+    resta2 = cv2.absdiff(img1,img2)
+
+    #CONCATENA LAS IMÁGENES DE SALIDA DE FORMA VERTICAL
+    restaConcatenada =cv2.vconcat([resta,resta2])
+
+    cv2.imshow("Resta",restaConcatenada)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 
 
