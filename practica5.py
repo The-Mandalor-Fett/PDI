@@ -338,6 +338,46 @@ def logico():
     rutaArchivo2=("./img/sacapuntas.jpg")
     img2 = cv2.imread(rutaArchivo2,0)
 
+    #FUNCIÓN AND
+    opAnd = cv2.bitwise_and(img1,img2)
+
+    #FUNCIÓN OR
+    opOR = cv2.bitwise_or(img1,img2)
+
+    #FUNCIÓN XOR
+    opXor =cv2.bitwise_xor(img1,img2)
     
+    #GRAFICAMOS LAS IMÁGENES
+    plt.figure()
+    plt.title("Imágenes originales")
+    plt.subplot(121)
+    plt.imshow(img1, cmap='gray')
+    plt.title('Imagen 1')
+    plt.axis('off')
+
+    plt.subplot(122)
+    plt.imshow(img2, cmap='gray')
+    plt.title('Imagen 2')
+    plt.axis('off')
+    
+    plt.figure()
+    plt.title("Imágenes de salida")
+    plt.subplot(131)
+    plt.imshow(opAnd, cmap='gray')
+    plt.title('Operación AND')
+    plt.axis('off')
+
+    plt.subplot(132)
+    plt.imshow(opOR, cmap='gray')
+    plt.title('Operación OR')
+    plt.axis('off')
+
+    plt.subplot(133)
+    plt.imshow(opXor, cmap='gray')
+    plt.title('Operación XOR')
+    plt.axis('off')
+    plt.show()
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 
