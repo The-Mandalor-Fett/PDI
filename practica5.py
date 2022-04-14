@@ -298,13 +298,16 @@ def suma():
     plt.imshow(img1, cmap='gray')
     plt.axis('off')
 
-    #GRAFICA LA IMAGEN TRANSFORMADA
     plt.subplot(122)
     plt.imshow(img2, cmap='gray')
     plt.axis('off')
     
     cv2.imshow("Suma de imágenes",suma)
     cv2.imshow("Resultado 2",suma2)
+    print('img1[0,0]= ', img1[0,0])
+    print('img2[0,0]= ', img2[0,0])
+    print('suma1[0,0]= ', suma[0,0])
+    print('suma2[0,0]= ', suma2[0,0])
     plt.show()
     cv2.waitKey(0)
     cv2.destroyAllWindows()
@@ -332,11 +335,11 @@ def resta():
 
 #MÉTODO OPERACIONES LÓGICAS
 def logico():
-    #OBTENEMOS LA RUTA DE LAS IMÁGENES
-    rutaArchivo1=("./img/cadena.jpg")
-    img1 = cv2.imread(rutaArchivo1,0)
-    rutaArchivo2=("./img/sacapuntas.jpg")
-    img2 = cv2.imread(rutaArchivo2,0)
+    #CREAMOS 2 IMÁGENES UN CUADRADO Y UN CÍRCULO
+    img1 = np.zeros((400,600), dtype=np.uint8)
+    img1[100:300,200:400] = 255 #CREA EL CUADRADO CON PIXELES BLANCOS
+    img2 = np.zeros((400,600), dtype=np.uint8)
+    img2 = cv2.circle(img2,(300,200),125,(255),-1)#CREA UN CÍRCULO  
 
     #FUNCIÓN AND
     opAnd = cv2.bitwise_and(img1,img2)
