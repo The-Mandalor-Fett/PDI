@@ -325,7 +325,10 @@ def resta():
 
     #FUNCIÓN RESTA absdiff
     resta2 = cv2.absdiff(img1,img2)
-
+    print('img1[0,0]= ', img1[0,0])
+    print('img2[0,0]= ', img2[0,0])
+    print('resta1[0,0]= ', resta[0,0])
+    print('resta2[0,0]= ', resta2[0,0])
     #CONCATENA LAS IMÁGENES DE SALIDA DE FORMA VERTICAL
     restaConcatenada =cv2.vconcat([resta,resta2])
 
