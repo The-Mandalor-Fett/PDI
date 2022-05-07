@@ -400,6 +400,13 @@ def rgb2cmy(img):
     # CALCULAMOS EL VALOR DE c
     c = (1-rgb[...,2] - k)/(1-k)
 
+    # cALCULAMOS EL VALOR DE m
+    m = (1-rgb[...,1] - k)/(1-k)
+
+    # CALCULAMOS EL VALOR DE y
+    y = (1-rgb[...,0] - k)/(1-k)
+
+    
 
 
     cv2.imshow("RGB",imgRGB)
