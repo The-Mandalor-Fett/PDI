@@ -411,6 +411,9 @@ def rgb2cmy(img):
     
     cv2.imshow("RGB",imgRGB)
     cv2.imshow("CMY",imgCMY)
+    cv2.imshow("CMY_C",c)
+    cv2.imshow("CMY_M",m)
+    cv2.imshow("CMY_Y",y)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
