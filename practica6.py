@@ -386,3 +386,17 @@ def logico():
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
+def rgb2cmy(img):
+    rutaArchivo=("./img/"+img)
+    imgRGB = cv2.imread(rutaArchivo,1)
+    
+    #CONVERTIMOS LOS PIXELES DE LA IMAGEN EN floats
+    #PARA OBTENER EL RGB
+    rgb = imgRGB.astype(np.float)/255
+    
+    
+    cv2.imshow("RGB",imgRGB)
+    cv2.imshow("CMY",imgCMY)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
