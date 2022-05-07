@@ -394,7 +394,14 @@ def rgb2cmy(img):
     #PARA OBTENER EL RGB
     rgb = imgRGB.astype(np.float)/255
     
-    
+    # CALCULAMOS EL VALOR DE K COMO (1 - EL VALOR MAYOR DE CUALQUIERA DE LOS VALORES DE r, g, b)
+    k = 1 - np.max(rgb, axis=2)
+
+    # CALCULAMOS EL VALOR DE c
+    c = (1-rgb[...,2] - k)/(1-k)
+
+
+
     cv2.imshow("RGB",imgRGB)
     cv2.imshow("CMY",imgCMY)
     cv2.waitKey(0)
