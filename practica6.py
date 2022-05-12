@@ -407,7 +407,7 @@ def rgb2cmy(img):
     y = (1-rgb[...,0] - k)/(1-k)
 
     #COMBINAMOS LOS CANALES CMY
-    imgCMY = (np.dstack((c,m,y,k)) * 255).astype(np.uint8)
+    imgCMY = (np.dstack((c,m,y)) * 255).astype(np.uint8)
     
     cv2.imshow("RGB",imgRGB)
     cv2.imshow("CMY",imgCMY)
