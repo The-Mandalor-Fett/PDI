@@ -423,3 +423,9 @@ def rgb2cmy(img):
     cv2.imshow("CMY_Y",y1)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+#MÉTODO RGB2HSI
+def rgb2hsi(img):
+    rutaArchivo=("./img/"+img)
+    imgRGB = cv2.imread(rutaArchivo,1)
+        https://github.com/SVLaursen/Python-RGB-to-HSI
