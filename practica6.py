@@ -164,7 +164,7 @@ def umbral(img):
     #DEPENDIENDO DE EL VALOR DE umbral Y EL VALOR DEL pixel
     #ESO SE MULTIPLICA POR 255, DANDO 0 O 255 DEPENDIENDO DEL CASO
     #uint8 SIGNIFICA UNSIGNED INTEGER O SEA ENTERO SIN SIGNO, SIEMPRE ES POSITIVO
-    #Y ES DE 8 BITS, POR LO QUE VA DE 0 A 255, ESO NOS DARÁ LA máscara PARA OBTENER LA IMAGEN 
+    #Y ES DE 8 BITS, POR LO QUE VA DE 0 A 255, ESO NOS DARÁ LA máscara PARA OBTENER LA IMAGEN
 
     #Segunda forma de obtener el umbralado binario
     ret,thresh1= cv2.threshold(imgUmbral,umbral,255,cv2.THRESH_BINARY)#OBTIENE EL umbralado MEDIANTE LA FUNCIÓN threshold DE OPENCV
@@ -212,12 +212,12 @@ def log(img):
     plt.xlabel('brillo - f(x,y)')
     plt.ylabel('brillo - g(x, y)')
     plt.show()
-    
-    
+
+
     #cv2.imshow("Imagen original",img)
     #cv2.imshow("LOG",imgLog)
     #print(constante)
-    
+
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
@@ -240,7 +240,7 @@ def potencia(img):
     gamma2 = 2.5
     constante2 = 255/(np.power(255,gamma2))
     y2 = constante2 * np.power(x,gamma2)
-    
+
     #GRAFICAMOS PARA VER EL COMPORTAMIENTO DE LAS FUNCIONES
     plt.figure()
     plt.title('correción gamma')
@@ -250,7 +250,7 @@ def potencia(img):
     plt.legend(loc='upper left')
     plt.xlabel('intensidades de entrada')
     plt.ylabel('intensidades de salida')
-    
+
 
     #CALCULAMOS LA TRANFORMACIÓN GAMMA
     transformacionGamma = constante1 * np.power(img,gamma2)
@@ -283,7 +283,7 @@ def suma():
     #PARA REALIZAR LA suma AMBAS IMÁGENES DEBEN DE SER DEL MISMO TAMAÑO
     #FUNCIÓN SUMA DE DOS IMÁGENES
     suma = cv2.add(img1,img2)
-    
+
     #FUNCIÓN suma CON ADDWEIGTH
     suma2 = cv2.addWeighted(img1,0.5,img2,0.5,0)
     '''PARA ESTA SUMA SE NOS PIDE LA imagen1 CON UN VALOR DE TRANSPARENCIA
@@ -301,7 +301,7 @@ def suma():
     plt.subplot(122)
     plt.imshow(img2, cmap='gray')
     plt.axis('off')
-    
+
     cv2.imshow("Suma de imágenes",suma)
     cv2.imshow("Resultado 2",suma2)
     print('img1[0,0]= ', img1[0,0])
@@ -342,7 +342,7 @@ def logico():
     img1 = np.zeros((400,600), dtype=np.uint8)
     img1[100:300,200:400] = 255 #CREA EL CUADRADO CON PIXELES BLANCOS
     img2 = np.zeros((400,600), dtype=np.uint8)
-    img2 = cv2.circle(img2,(300,200),125,(255),-1)#CREA UN CÍRCULO  
+    img2 = cv2.circle(img2,(300,200),125,(255),-1)#CREA UN CÍRCULO
 
     #FUNCIÓN AND
     opAnd = cv2.bitwise_and(img1,img2)
@@ -352,7 +352,7 @@ def logico():
 
     #FUNCIÓN XOR
     opXor =cv2.bitwise_xor(img1,img2)
-    
+
     #GRAFICAMOS LAS IMÁGENES
     plt.figure()
     plt.title("Imágenes originales")
@@ -365,7 +365,7 @@ def logico():
     plt.imshow(img2, cmap='gray')
     plt.title('Imagen 2')
     plt.axis('off')
-    
+
     plt.figure()
     plt.title("Imágenes de salida")
     plt.subplot(131)
@@ -389,11 +389,11 @@ def logico():
 def rgb2cmy(img):
     rutaArchivo=("./img/"+img)
     imgRGB = cv2.imread(rutaArchivo,1)
-    
+
     #CONVERTIMOS LOS PIXELES DE LA IMAGEN EN floats
     #PARA OBTENER EL RGB
     rgb = imgRGB.astype(np.float)/255
-    
+
     # CALCULAMOS EL VALOR DE K COMO (1 - EL VALOR MAYOR DE CUALQUIERA DE LOS VALORES DE r, g, b)
     k = 1 - np.max(rgb, axis=2)
 
@@ -408,12 +408,18 @@ def rgb2cmy(img):
 
     #COMBINAMOS LOS CANALES CMY
     imgCMY = (np.dstack((c,m,y,k)) * 255).astype(np.uint8)
-    
+
+    #DIVIDIMOS LOS CANALES
+    y1, m1, c1, k1 = cv2.split(CMYK)
+
+    np.isfinite(c1).all()
+    np.isfinite(m1).all()
+    np.isfinite(k1).all()
+    np.isfinite(y1).all()
     cv2.imshow("RGB",imgRGB)
     cv2.imshow("CMY",imgCMY)
-    cv2.imshow("CMY_C",c)
-    cv2.imshow("CMY_M",m)
-    cv2.imshow("CMY_Y",y)
+    cv2.imshow("CMY_C",c1)
+    cv2.imshow("CMY_M",m1)
+    cv2.imshow("CMY_Y",y1)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-
