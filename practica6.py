@@ -410,7 +410,7 @@ def rgb2cmy(img):
     imgCMY = (np.dstack((c,m,y,k)) * 255).astype(np.uint8)
 
     #DIVIDIMOS LOS CANALES
-    y1, m1, c1, k1 = cv2.split(CMYK)
+    y1, m1, c1, k1 = cv2.split(imgCMY)
 
     np.isfinite(c1).all()
     np.isfinite(m1).all()
