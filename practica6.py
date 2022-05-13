@@ -433,11 +433,11 @@ def rgb2hsi(img):
         #CRGAMOS LA IMAGEN COMO UNA DE 32 BITS DE TIPO FLOTANTE
         imgRGB = np.float32(imgRGB)/255
 
-        #Separate color channels
+        #Separamos los valores de los canales
         blue = imgRGB[:,:,0]
         green = imgRGB[:,:,1]
         red = imgRGB[:,:,2]
-        #CALCULAMOS LA INTENSIDAD SATURACIÓB Y MATIZ
+        #CALCULAMOS LA INTENSIDAD SATURACIÓN Y MATIZ
         intensidad = np.divide(blue + red + green,3)
         minimo = np.minimum(np.minimum(red, green), blue)
         saturacion = 1 - (3 / (red + green + blue + 0.001) * minimo)
