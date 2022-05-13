@@ -430,14 +430,14 @@ def rgb2hsi(img):
     rutaArchivo=("./img/"+img)
     imgRGB = cv2.imread(rutaArchivo,1)
     with np.errstate(divide='ignore', invalid='ignore'):
-        #Load image with 32 bit floats as variable type
+        #CRGAMOS LA IMAGEN COMO UNA DE 32 BITS DE TIPO FLOTANTE
         imgRGB = np.float32(imgRGB)/255
 
         #Separate color channels
         blue = imgRGB[:,:,0]
         green = imgRGB[:,:,1]
         red = imgRGB[:,:,2]
-        #CALCULAMOS LA INTENSIDAD 
+        #CALCULAMOS LA INTENSIDAD SATURACIÓB Y MATIZ
         intensidad = np.divide(blue + red + green,3)
         minimo = np.minimum(np.minimum(red, green), blue)
         saturacion = 1 - (3 / (red + green + blue + 0.001) * minimo)
@@ -457,7 +457,7 @@ def rgb2hsi(img):
 
     cv2.imshow('HSI ', imgHSI)
 
-    #MOSTRAMOS LAS 3 IMÁGENES
+    #MOSTRAMOS LAS 3 IMÁGENES DE LOS CANALES
     cv2.imshow('CANAL H ', imgHSI[:, :, 0])
     cv2.imshow('CANAL S ', imgHSI[:, :, 1])
     cv2.imshow('CANAL I ', imgHSI[:, :, 2])
