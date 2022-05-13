@@ -453,7 +453,7 @@ def rgb2hsi(img):
                         matiz[i][j] = matiz[i][j]
                     else:
                         matiz[i][j] = ((360 * math.pi) / 180.0) - matiz[i][j]
-        imgHSI = cv2.merge((matiz,saturacion,intensidad))
+    imgHSI = cv2.merge((matiz,saturacion,intensidad))
 
     cv2.imshow('HSI ', imgHSI)
 
