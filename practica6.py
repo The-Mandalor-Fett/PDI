@@ -5,6 +5,7 @@ from matplotlib import collections, pyplot as plt
 from scipy import stats as st
 import statistics as stats
 from collections import Counter
+import math
 def abrir(img):#SE LE PASA EL nombre DE LA IMAGEN COMO PARÁMETRO
 
     #EL NOMBRE DE LA IMAGEN SERA INTRODUCIDA EN LA VARIABLE img
@@ -428,4 +429,40 @@ def rgb2cmy(img):
 def rgb2hsi(img):
     rutaArchivo=("./img/"+img)
     imgRGB = cv2.imread(rutaArchivo,1)
-        https://github.com/SVLaursen/Python-RGB-to-HSI
+    with np.errstate(divide='ignore', invalid='ignore'):
+        #Load image with 32 bit floats as variable type
+        imgRGB = np.float32(imgRGB)/255
+
+        #Separate color channels
+        blue = imgRGB[:,:,0]
+        green = imgRGB[:,:,1]
+        red = imgRGB[:,:,2]
+        #CALCULAMOS LA INTENSIDAD 
+        intensidad = np.divide(blue + red + green,3)
+        minimo = np.minimum(np.minimum(red, green), blue)
+        saturacion = 1 - (3 / (red + green + blue + 0.001) * minimo)
+        matiz = np.copy(red)
+        for i in range(0, blue.shape[0]):
+                for j in range(0, blue.shape[1]):
+                    matiz[i][j] = 0.5 * ((red[i][j] - green[i][j]) + (red[i][j] - blue[i][j])) / \
+                                math.sqrt((red[i][j] - green[i][j])**2 +
+                                        ((red[i][j] - blue[i][j]) * (green[i][j] - blue[i][j])))
+                    matiz[i][j] = math.acos(matiz[i][j])
+
+                    if blue[i][j] <= green[i][j]:
+                        matiz[i][j] = matiz[i][j]
+                    else:
+                        matiz[i][j] = ((360 * math.pi) / 180.0) - matiz[i][j]
+        imgHSI = cv2.merge((matiz,saturacion,intensidad))
+
+    cv2.imshow('HSI ', imgHSI)
+
+    #MOSTRAMOS LAS 3 IMÁGENES
+    cv2.imshow('CANAL H ', imgHSI[:, :, 0])
+    cv2.imshow('CANAL S ', imgHSI[:, :, 1])
+    cv2.imshow('CANAL I ', imgHSI[:, :, 2])
+
+    
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+        
