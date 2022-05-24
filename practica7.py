@@ -47,6 +47,8 @@ absSobelY = cv.convertScaleAbs(sobelY)
 sobel = cv.addWeighted(absSobelX, 0.5, absSobelY, 0.5, 0)
 
 cv.imshow("Imagen Sobel", sobel)
-
+https://www.codetd.com/es/article/12713129
+https://www.codetd.com/es/article/13033607
+https://www.codetd.com/es/article/11689032
 cv.waitKey(0)
 cv.destroyAllWindows()
