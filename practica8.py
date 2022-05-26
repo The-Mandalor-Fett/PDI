@@ -7,8 +7,17 @@ kernel = np.ones((3,3),np.uint8)
 #Erosión
 imgErosion = cv2.erode(img,kernel,iterations = 1)
 #Dilatación
-dilatacion = cv2.dilate(img,kernel,iterations = 1)
+imgDilatacion = cv2.dilate(img,kernel,iterations = 1)
+
+img2= cv2.imread("./img/figura-2.jpg")
 #Apertura
-apertura = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+imgApertura = cv2.morphologyEx(img2, cv2.MORPH_OPEN, kernel)
 #Cierre
-cierre = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)
+imgCierre = cv2.morphologyEx(img2, cv2.MORPH_CLOSE, kernel)
+
+cv2.imshow("Imagen Erosión",imgErosion)
+cv2.imshow("Imagen Dilatación",imgDilatacion)
+cv2.imshow("Imagen Apertura",imgApertura)
+cv2.imshow("Imagen Cierre",imgCierre)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
